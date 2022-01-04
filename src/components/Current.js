@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
@@ -12,11 +12,7 @@ function Current() {
         'playerB': {'name' : '', 'played' : ''}
     });
 
-    //let [currentgame, setCurrentgame] = useState([]);
-
-//    let data = [];
-
-    let data = [
+    let rowdata = [
         {
             "gameId": '5435435435',
             "t": 'testi',
@@ -32,77 +28,94 @@ function Current() {
         { headerName: "Player A played", field: "playerA.played" },
         { headerName: "Player B", field: "playerB.name" },
         { headerName: "Player B played", field: "playerB.played" }
-    ];  
-    
-
-    //useEffect(() => {
+    ];      
         
-        const websocket = new WebSocket("wss://bad-api-assignment.reaktor.com/rps/live");
+    const websocket = new WebSocket("wss://bad-api-assignment.reaktor.com/rps/live");
 
-        websocket.onopen = event => {
-            console.log("websocket avattu!");
-        };
+    websocket.onopen = event => {
+        console.log("Websocket opened");
+    };
 
-        websocket.onmessage = function (event) {
-            //console.log("tässä jsonstringify: " + JSON.stringify(event.data));
-            console.log("tässä event.data: " + event.data);
-            console.log("tässä JSONparse" + JSON.parse(event.data));
+    websocket.onmessage = function (event) {
 
-            const datajson = JSON.parse(event.data);
-            console.log("Tässä datajson: " + datajson);
+        let datajson = JSON.parse(JSON.parse(event.data)); // only 1 JSON.parse results in a string, not object
+        console.log("Tässä datajson: " + datajson); // [Object object]
+        console.log("Tässä datajson toString: " + datajson.toString());
+        console.log("datajsonin tyyppi: " + typeof datajson); // object
 
-          //  setCurrentgame(JSON.parse(event.data));
-//            setCurrentgame(event.data);
+        console.log("datajson gameid: " + datajson.gameId);
+        console.log("datajson time: " + datajson.t);
+        console.log("datajson A: " + datajson.playerA.toString());
+        console.log("datajson B: " + datajson.playerB.toString());
 
-            setCurrentgame(
-                {
-                    gameId: datajson.gameId,
-                    t: datajson.t,
-                    playerA: datajson.playerA,
-                    playerB: datajson.playerB
-                }
-            );
+        //let uudelleenparsittudatajson = JSON.parse(datajson);
+        //console.log("tässä uudelleenparsittu: " + uudelleenparsittudatajson);
+        //console.log("tässä uudelleenparsitun tyyppi: " + typeof uudelleenparsittudatajson); // object
 
-            //data.push(currentgame);
-            data.length = 0;
-            data.push(datajson);
+        //console.log("uudelleenparisttu gameid: " + uudelleenparsittudatajson.gameId);
+        //console.log("uudelleenparisttu time: " + uudelleenparsittudatajson.t);
 
-            //console.log("tässä currentgame: " + JSON.stringify(currentgame));
+        //console.log("An tyyppi: " + typeof uudelleenparsittudatajson.playerA); // object
+        //let parsittuA = JSON.parse(uudelleenparsittudatajson.playerA);
+        //console.log("An parsittu tyyppi: " + typeof parsittuA);
+        //console.log("uudelleenparisttu A nimi: " + parsittuA.name);        
+ 
+        setCurrentgame(
+            {
+                gameId: datajson.gameId,
+                t: datajson.t,
+                playerA: datajson.playerA,
+                playerB: datajson.playerB
+            }
+        );        
 
-            console.log("tässä data: " + JSON.stringify(data));
-            
-            /*tässä JSONparse{"type":"GAME_RESULT",
-            "gameId":"45516eae8775e35b1c54384d",
-            "t":1641208327087,
-            "playerA":{"name":"Aino Koskinen","played":"PAPER"},
-            "playerB":{"name":"Marjatta Virtanen","played":"ROCK"}}*/
-        };
+        rowdata.length = 0;
+        //rowdata.push(datajson);
+        rowdata.push(currentgame);
+
+        console.log("tässä currentgame: " + JSON.stringify(currentgame));
+        console.log("tässä currentgamen tyyppi: " + typeof currentgame);
+        console.log("tässä data onmessagessa: " + JSON.stringify(rowdata));   
         
-        websocket.onclose = event => {
-            console.log("websocket suljettu!");
-            console.log("koodi: " + event.code);
-        };
+        if (datajson.t != undefined) {
 
-//    }, []);
+            document.getElementById("answer").innerHTML = "<p>" +
+            "<b>Game ID: </b>" + datajson.gameId + "<br/>" +
+            "<b>Time: </b>" + datajson.t + "<br/>" + 
+            "<b>Player A: </b>" + datajson.playerA.name + "<br/>" +
+            "<b>A's hand: </b>" + datajson.playerA.played + "<br/>" +
+            "<b>Player B: </b>" + datajson.playerB.name + "<br/>" +
+            "<b>B's hand: </b>" + datajson.playerB.played + "<br/>" +
+            "</p>";
+        }
+        if (datajson.t == undefined) {
 
-    const showGame = () => {
-        return (
-            <p>  data.toString();      
-            </p>
-        );
-    }
-    
+            document.getElementById("answer").innerHTML = "<p>" +
+            "<b>Game ID: </b>" + datajson.gameId + "<br/>" +
+            "<b>Player A: </b>" + datajson.playerA.name + "<br/>" +
+            "<b>Player B: </b>" + datajson.playerB.name + "<br/>" +
+            "</p>";
+        }
+        
+    };
+        
+    // Websocket closes
+    websocket.onclose = event => {
+        console.log("Websocket closed, code " + event.code);
+    };
+
+    // Return statement
     return (
         <div>
-            <h1>Current games here</h1>
-            <p> <showGame /> </p>
+            <h1>Current games</h1>
+            <div id="answer"></div>
+
             <div className="ag-theme-material" style={{ height: '700px', width: '70%', margin: 'auto' }}>
                 <AgGridReact
                     columnDefs={columns}
-                    rowData={data}>
+                    rowData={rowdata}>
                 </AgGridReact>        
             </div>
-
 
         </div>
     );
