@@ -35,7 +35,7 @@ function Past() {
 
     return (
         <div>
-            <h1>Past games here</h1>
+            <h1>Past games</h1>
 
             <div className="ag-theme-material" style={{ height: '700px', width: '70%', margin: 'auto' }}>
                 <AgGridReact
