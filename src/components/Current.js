@@ -5,25 +5,28 @@ import 'ag-grid-community/dist/styles/ag-theme-material.css';
 
 function Current() {
 
-    let [currentgame, setCurrentgame] = useState({
+    // CURRENT GAME
+    const [currentgame, setCurrentgame] = useState({
         'gameId': '',
         't': '',
         'playerA': {'name' : '', 'played' : ''},
         'playerB': {'name' : '', 'played' : ''}
     });
 
-    const [rowdata, setRowdata] = useState([]);
+    // AGGRID
+    const [rowdata, setRowdata] = useState([]); // row content for AgGrid
     let array = []; // AgGrid only accepts an array
-
     const columns = [
         { headerName: "Game ID", field: "gameId" },
-        { headerName: "Time", field: "t" },
+        { headerName: "Timestamp", field: "t" },
         { headerName: "Player A", field: "playerA.name" },
         { headerName: "Player A played", field: "playerA.played" },
         { headerName: "Player B", field: "playerB.name" },
         { headerName: "Player B played", field: "playerB.played" }
-    ];      
+    ]; // columns for AgGrid
         
+    // WEBSOCKET
+
     // Create new Websocket
     const websocket = new WebSocket("wss://bad-api-assignment.reaktor.com/rps/live");
 
@@ -38,13 +41,8 @@ function Current() {
         let datajson = JSON.parse(JSON.parse(event.data)); // parsing only once results in a string, not object
         // console.log("Tässä datajson: " + datajson); // [Object object]
         // console.log("datajsonin tyyppi: " + typeof datajson); // object
-
-        console.log("datajson gameid: " + datajson.gameId);
-        console.log("datajson time: " + datajson.t); 
-        console.log("datajson time type: " + typeof datajson.t); // number
-        console.log("datajson A: " + datajson.playerA.toString());
-        console.log("datajson B: " + datajson.playerB.toString());     
  
+        // set current game
         setCurrentgame({
                 gameId: datajson.gameId,
                 t: datajson.t,
@@ -52,19 +50,17 @@ function Current() {
                 playerB: datajson.playerB
             });        
 
-        console.log("tässä currentgame: " + JSON.stringify(currentgame));
-        console.log("tässä currentgamen tyyppi: " + typeof currentgame); // object
+        //console.log("currentgame: " + JSON.stringify(currentgame)); // [Object object]
+        //console.log("currentgame type: " + typeof currentgame); // object
 
         array.length = 0; // keep only one game in the array at a time
-        array.push(currentgame); // add current game to array        
-        
-        //setRowdata(currentgame);   
+        array.push(currentgame); // add currentgame to array          
         setRowdata(array);
-        console.log("rowdata's type and content, onmessage: " +
-            typeof rowdata + "; " +
-            JSON.stringify(rowdata)); // array contains one object  
+
+        //console.log("rowdata's type and content: " + typeof rowdata + "; " + JSON.stringify(rowdata)); // array contains one object
         
-        if (datajson.t === undefined) {
+        // show the current game on the page
+        if (datajson.t === undefined) { // games with undefined time are not finished
             document.getElementById("answer").innerHTML = "<p>" +
             "<b>GAME STARTED! </b> <br/>" +
             "<b>Game ID: </b>" + datajson.gameId + "<br/>" +
@@ -72,11 +68,11 @@ function Current() {
             "<b>Player B: </b>" + datajson.playerB.name + "<br/>" +
             "</p>";
         }        
-        if (datajson.t !== undefined) {
+        if (datajson.t !== undefined) { // games with timestamp are finished
             document.getElementById("answer").innerHTML = "<p>" +
             "<b>GAME FINISHED! </b> <br/>" +
             "<b>Game ID: </b>" + datajson.gameId + "<br/>" +
-            "<b>Time: </b>" + datajson.t + "<br/>" + 
+            "<b>Timestamp: </b>" + datajson.t + "<br/>" + 
             "<b>Player A: </b>" + datajson.playerA.name + "<br/>" +
             "<b>A's hand: </b>" + datajson.playerA.played + "<br/>" +
             "<b>Player B: </b>" + datajson.playerB.name + "<br/>" +
@@ -91,12 +87,12 @@ function Current() {
         //console.log("Websocket closed, code " + event.code);
     };
 
-    // Return statement
+    // RETURN STATEMENT
     return (
         <div>
             <h1>Current games</h1>
             <div id="answer"></div>
-
+            
             <div className="ag-theme-material" style={{ height: '700px', width: '70%', margin: 'auto' }}>
                 <AgGridReact
                     columnDefs={columns}
