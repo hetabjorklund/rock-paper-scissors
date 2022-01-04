@@ -7,7 +7,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import Historical from './components/Historical';
+import Past from './components/Past';
 import Current from './components/Current';
 
 function App() {
@@ -32,12 +32,12 @@ function App() {
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <TabList onChange={handleChange} >
-              <Tab label="Current" value="1" />
-              <Tab label="Historical" value="2" />
+              <Tab label="Current games" value="1" />
+        {/*      <Tab label="Past games" value="2" /> */}
             </TabList>
           </Box>
           <TabPanel value="1"> <Current /> </TabPanel>
-          <TabPanel value="2"> <Historical /> </TabPanel>
+        {/*  <TabPanel value="2">   <Past /> </TabPanel> */}
         </TabContext>
         </Box>
 

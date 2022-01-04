@@ -3,7 +3,7 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 
-function Historical() {
+function Past() {
 
     // columns for the table
     const columns = [
@@ -30,12 +30,12 @@ function Historical() {
 
     // useEffect here
     useEffect(() => fetchData(), []);
-    console.log("tässä histdata: " + histdata);
-    console.log("tässä histdata-jsonstringify: " + JSON.stringify(histdata));
+    console.log("histdata: " + histdata);
+    console.log("histdata-jsonstringify: " + JSON.stringify(histdata));
 
     return (
         <div>
-            <h1>Historical games here</h1>
+            <h1>Past games here</h1>
 
             <div className="ag-theme-material" style={{ height: '700px', width: '70%', margin: 'auto' }}>
                 <AgGridReact
@@ -49,4 +49,4 @@ function Historical() {
 
 }
 
-export default Historical;
+export default Past;
