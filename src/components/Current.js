@@ -12,14 +12,8 @@ function Current() {
         'playerB': {'name' : '', 'played' : ''}
     });
 
-    let rowdata = [
-        {
-            "gameId": '5435435435',
-            "t": 'testi',
-            "playerA": {'name' : 'testia', 'played' : 'testikäsia'},
-            "playerB": {'name' : 'testib', 'played' : 'testikäsib'}
-        }
-    ];
+    const [rowdata, setRowdata] = useState([]);
+    let array = []; // AgGrid only accepts an array
 
     const columns = [
         { headerName: "Game ID", field: "gameId" },
@@ -30,56 +24,57 @@ function Current() {
         { headerName: "Player B played", field: "playerB.played" }
     ];      
         
+    // Create new Websocket
     const websocket = new WebSocket("wss://bad-api-assignment.reaktor.com/rps/live");
 
+    // Websocket opens
     websocket.onopen = event => {
-        console.log("Websocket opened");
+        //console.log("Websocket opened");
     };
 
+    // Websocket receives a message from API
     websocket.onmessage = function (event) {
 
-        let datajson = JSON.parse(JSON.parse(event.data)); // only 1 JSON.parse results in a string, not object
-        console.log("Tässä datajson: " + datajson); // [Object object]
-        console.log("Tässä datajson toString: " + datajson.toString());
-        console.log("datajsonin tyyppi: " + typeof datajson); // object
+        let datajson = JSON.parse(JSON.parse(event.data)); // parsing only once results in a string, not object
+        // console.log("Tässä datajson: " + datajson); // [Object object]
+        // console.log("datajsonin tyyppi: " + typeof datajson); // object
 
         console.log("datajson gameid: " + datajson.gameId);
-        console.log("datajson time: " + datajson.t);
+        console.log("datajson time: " + datajson.t); 
+        console.log("datajson time type: " + typeof datajson.t); // number
         console.log("datajson A: " + datajson.playerA.toString());
-        console.log("datajson B: " + datajson.playerB.toString());
-
-        //let uudelleenparsittudatajson = JSON.parse(datajson);
-        //console.log("tässä uudelleenparsittu: " + uudelleenparsittudatajson);
-        //console.log("tässä uudelleenparsitun tyyppi: " + typeof uudelleenparsittudatajson); // object
-
-        //console.log("uudelleenparisttu gameid: " + uudelleenparsittudatajson.gameId);
-        //console.log("uudelleenparisttu time: " + uudelleenparsittudatajson.t);
-
-        //console.log("An tyyppi: " + typeof uudelleenparsittudatajson.playerA); // object
-        //let parsittuA = JSON.parse(uudelleenparsittudatajson.playerA);
-        //console.log("An parsittu tyyppi: " + typeof parsittuA);
-        //console.log("uudelleenparisttu A nimi: " + parsittuA.name);        
+        console.log("datajson B: " + datajson.playerB.toString());     
  
-        setCurrentgame(
-            {
+        setCurrentgame({
                 gameId: datajson.gameId,
                 t: datajson.t,
                 playerA: datajson.playerA,
                 playerB: datajson.playerB
-            }
-        );        
-
-        rowdata.length = 0;
-        //rowdata.push(datajson);
-        rowdata.push(currentgame);
+            });        
 
         console.log("tässä currentgame: " + JSON.stringify(currentgame));
-        console.log("tässä currentgamen tyyppi: " + typeof currentgame);
-        console.log("tässä data onmessagessa: " + JSON.stringify(rowdata));   
-        
-        if (datajson.t != undefined) {
+        console.log("tässä currentgamen tyyppi: " + typeof currentgame); // object
 
+        array.length = 0; // keep only one game in the array at a time
+        array.push(currentgame); // add current game to array        
+        
+        //setRowdata(currentgame);   
+        setRowdata(array);
+        console.log("rowdata's type and content, onmessage: " +
+            typeof rowdata + "; " +
+            JSON.stringify(rowdata)); // array contains one object  
+        
+        if (datajson.t === undefined) {
             document.getElementById("answer").innerHTML = "<p>" +
+            "<b>GAME STARTED! </b> <br/>" +
+            "<b>Game ID: </b>" + datajson.gameId + "<br/>" +
+            "<b>Player A: </b>" + datajson.playerA.name + "<br/>" +
+            "<b>Player B: </b>" + datajson.playerB.name + "<br/>" +
+            "</p>";
+        }        
+        if (datajson.t !== undefined) {
+            document.getElementById("answer").innerHTML = "<p>" +
+            "<b>GAME FINISHED! </b> <br/>" +
             "<b>Game ID: </b>" + datajson.gameId + "<br/>" +
             "<b>Time: </b>" + datajson.t + "<br/>" + 
             "<b>Player A: </b>" + datajson.playerA.name + "<br/>" +
@@ -87,21 +82,13 @@ function Current() {
             "<b>Player B: </b>" + datajson.playerB.name + "<br/>" +
             "<b>B's hand: </b>" + datajson.playerB.played + "<br/>" +
             "</p>";
-        }
-        if (datajson.t == undefined) {
-
-            document.getElementById("answer").innerHTML = "<p>" +
-            "<b>Game ID: </b>" + datajson.gameId + "<br/>" +
-            "<b>Player A: </b>" + datajson.playerA.name + "<br/>" +
-            "<b>Player B: </b>" + datajson.playerB.name + "<br/>" +
-            "</p>";
-        }
+        }        
         
     };
-        
+
     // Websocket closes
     websocket.onclose = event => {
-        console.log("Websocket closed, code " + event.code);
+        //console.log("Websocket closed, code " + event.code);
     };
 
     // Return statement
