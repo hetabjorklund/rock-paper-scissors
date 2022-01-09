@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
-import postmandata from './static/postmanresponse.json';
+import postmandata from '../static/postmanresponse.json';
 
 function Past() {
 
