@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
+import postmandata from './static/postmanresponse.json';
 
 function Past() {
 
     // columns for the table
     const columns = [
-        { headerName: "Player", field: "player", sortable: true, filter: true },
+        { headerName: "Player", field: "name", sortable: true, filter: true },
         { headerName: "Number of matches", field: "numberofmatches", sortable: true, filter: true },
         { headerName: "Matches played", field: "matchesplayed", sortable: true, filter: true },
         { headerName: "Win ratio", field: "winratio", sortable: true, filter: true },        
@@ -20,18 +21,34 @@ function Past() {
     // array for the row data
     const [rowdata, setRowdata] = useState([]);
 
-    // fetch all data from API
-    const fetchData = () => {
-        fetch('https://bad-api-assignment.reaktor.com/rps/history')
-            .then(response => response.json())
-            .then(data => setHistdata(data.content))
-            .catch(error => console.error(error));
+    let player = {
+        "name": "",
+        "numberofmatches": 0,
+        "matchesplayed": [],
+        "winratio": 0.0,
+        "mostplayedhand" : ""
     };
 
+    const tiedot = postmandata.data;
+    console.log("tässä tiedot" + tiedot);
+    console.log("tiedon tyyppi " + typeof tiedot);
+
+    // fetch all data from API
+    /*const fetchData = () => {
+        fetch('http://bad-api-assignment.reaktor.com/rps/history')        
+        .then(response => response.json())
+        .then(responseData => setHistdata(responseData.data))
+        .catch(error => console.error(error));
+    };*/
+
     // useEffect here
-    useEffect(() => fetchData(), []);
+    useEffect(() => setHistdata(postmandata.data[0]), []);
+    
     console.log("histdata: " + histdata);
+    console.log("histdatan tyyppi: " + typeof histdata); // object
+    //console.log("histdata-parsed: " + JSON.parse(histdata));
     console.log("histdata-jsonstringify: " + JSON.stringify(histdata));
+    console.log("histdatan koko " + histdata.length)
 
     return (
         <div>
