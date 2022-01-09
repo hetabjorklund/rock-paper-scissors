@@ -32,12 +32,12 @@ function App() {
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <TabList onChange={handleChange} >
-              <Tab label="Current games" value="1" />
-          {/* <Tab label="Past games" value="2" /> */}
+          {/*    <Tab label="Current games" value="1" /> */}
+           <Tab label="Past games" value="1" /> 
             </TabList>
           </Box>
-          <TabPanel value="1"> <Current /> </TabPanel>
-          {/* <TabPanel value="2"> <Past /> </TabPanel> */}
+          {/* <TabPanel value="1"> <Current /> </TabPanel> */}
+            <TabPanel value="1"> <Past /> </TabPanel> 
         </TabContext>
         </Box>
 
