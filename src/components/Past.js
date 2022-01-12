@@ -21,7 +21,7 @@ function Past() {
     const [histdata, setHistdata] = useState([]);
 
     // array for the row data
-    //const [rowdata, setRowdata] = useState([]);
+    let rowdata = [];
 
     let player = {
         "name": "",
@@ -37,6 +37,7 @@ function Past() {
     //console.log("type of content: " + typeof content);
 
     // fetch all data from API
+    /* This results in a CORS problem that I can't solve, the workaround is to fetch the data using Postman, copy that into a local .json file and use that as a source */
     /*const fetchData = () => {
         fetch('http://bad-api-assignment.reaktor.com/rps/history')        
         .then(response => response.json())
@@ -44,7 +45,7 @@ function Past() {
         .catch(error => console.error(error));
     };*/
 
-    // useEffect to set the data
+    // useEffect to set the histData
     //useEffect(() => setHistdata(postmandata.data), []);
     useEffect(() => setHistdata(testdata.data), []);
     
@@ -55,78 +56,72 @@ function Past() {
 
     // divide games into groups based on player name
     const grouped = histdata.reduce((object, item) => {
+        // check player A
         if (!object[item.playerA.name]) { // if the player doesn't exist yet
-            object[item.playerA.name] = []; // create one
 
-            console.log("objekti: " + JSON.stringify(object[item.playerA.name]));
+            console.log("object: " + JSON.stringify(object));
+            console.log("item: " + JSON.stringify(item));
 
-            let hands = []; // list of hands the player has played
-            hands.push(item.playerA.played); // add the played hand to the list
+            object[item.playerA.name] = { "games": [], "hands": [] }; // create one with two values, both contain an array            
+            object[item.playerA.name].games.push(item); // push the item itself into games
+            object[item.playerA.name].hands.push(item.playerA.played); // push the played hand into hands
 
-            console.log("hands: " + hands);
-            //object[item.playerA.name].hands = hands; // "hands" property is a list of hands played, each hand is a string
+            console.log("object.item.playerA.name: " + JSON.stringify(object[item.playerA.name]));
+        }        
+        else { // if the player exits, push into the existing one
+            object[item.playerA.name].games.push(item); // push the item into games
+            object[item.playerA.name].hands.push(item.playerA.played) // push the played hand into hands
+        }
 
-        }      
-        object[item.playerA.name].push(item); // if the player exits, push into the existing one
-
-        if (!object[item.playerB.name]) {
-            object[item.playerB.name] = [];
-        }      
-        object[item.playerB.name].push(item);
+        // check player B
+        if (!object[item.playerB.name]) { // if the player doesn't exist yet
+            object[item.playerB.name] = { "games": [], "hands": [] }; // create one with two values, both contain an array
+            object[item.playerB.name].games.push(item); // push the item itself into games
+            object[item.playerB.name].hands.push(item.playerB.played); // push the played hand into hands            
+        }
+        else { // if the player exits, push into the existing one
+            object[item.playerB.name].games.push(item); // push the item into games
+            object[item.playerB.name].hands.push(item.playerB.played) // push the played hand into hands
+        }
 
         return object;
     }, {});
 
-    console.log("grouped: " + JSON.stringify(grouped));
-    console.log("grouped type: " + typeof grouped);
+    //console.log("grouped: " + JSON.stringify(grouped));
+    //console.log("grouped type: " + typeof grouped);
 
-    let games = []
+    // set the row data for the table
     for (const [key, value] of Object.entries(grouped)) {
         console.log(`${key}: ${JSON.stringify(value)}`);
 
-        // for each value, get the game id's
+        // for each player, get the game id's
         let gameids = [];
-        value.forEach(v => {
+        value.games.forEach(v => {
             //console.log(v.gameId);
             gameids.push(v.gameId);
-          });        
+        });        
+
+        // for each player, get the most played hand
+        let mostcommonhand = _.head(_(value.hands)
+            .countBy()
+            .entries()
+            .maxBy(_.last));
         
-        // push the data into the games array for the table
-        games.push(
+        // push the data into the games array
+        rowdata.push(
             {
                 "name": key,
-                "numberofmatches": value.length,
+                "numberofmatches": value.games.length,
                 "matchesplayed": gameids,
                 "winratio": 0.0,
-                "mostplayedhand" : ""
+                "mostplayedhand" : mostcommonhand
             }
         );
     }
     
-    console.log("games: " + JSON.stringify(games));
+    console.log("games: " + JSON.stringify(rowdata));
 
-    //setRowdata(games);    
-    
-    /*
-    let player = {
-        "name": "",
-        "numberofmatches": 0,
-        "matchesplayed": [],
-        "winratio": 0.0,
-        "mostplayedhand" : ""
-    };*/
-
-    // A: käydään ryhmittäin jaetut pelit läpi ja luodaan jokaisesta olio joka voidaan antaa taulukolle
-    /*let games = []
-    for (let [activity, trainings] of Object.entries(grouped)) {
-        let duration = _.sumBy(trainings, "duration");
-        games.push(
-            {
-                "activity": activity,
-                "duration": duration
-            });
-    }*/
-    
+   
 
     return (
         <div>
@@ -135,7 +130,7 @@ function Past() {
             <div className="ag-theme-material" style={{ height: '700px', width: '70%', margin: 'auto' }}>
                 <AgGridReact
                     columnDefs={columns}
-                    rowData={games}>
+                    rowData={rowdata}>
                 </AgGridReact>                     
             </div>
 
