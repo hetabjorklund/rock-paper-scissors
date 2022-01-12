@@ -86,9 +86,6 @@ function Past() {
         // check player A
         if (!object[item.playerA.name]) { // if the player doesn't exist yet            
 
-            //console.log("object: " + JSON.stringify(object));
-            //console.log("item: " + JSON.stringify(item));
-
             object[item.playerA.name] = { "games": [], "hands": [], "wins": 0 }; // create one with three values, games & hands are arrays and wins is an integer            
             object[item.playerA.name].games.push(item); // push the item itself into games
             object[item.playerA.name].hands.push(item.playerA.played); // push the played hand into hands
@@ -105,11 +102,11 @@ function Past() {
             let playersWins = object[item.playerA.name].wins;
             object[item.playerA.name].wins = checkWin(playersWins, ahand, bhand);            
         }
-
-        console.log("object.item.playerA.name: " + JSON.stringify(object[item.playerA.name]));
+        // console.log("player A: " + JSON.stringify(object[item.playerA.name]));
 
         // check player B
         if (!object[item.playerB.name]) { // if the player doesn't exist yet
+
             object[item.playerB.name] = { "games": [], "hands": [], "wins": 0 }; // create one with three values, games & hands are arrays and wins is an integer 
             object[item.playerB.name].games.push(item); // push the item itself into games
             object[item.playerB.name].hands.push(item.playerB.played); // push the played hand into hands
@@ -126,13 +123,11 @@ function Past() {
             let playersWins = object[item.playerB.name].wins;
             object[item.playerB.name].wins = checkWin(playersWins, bhand, ahand);
         }
-        console.log("object.item.playerB.name: " + JSON.stringify(object[item.playerB.name]));
-
+        // console.log("player B: " + JSON.stringify(object[item.playerB.name]));
         return object;
     }, {});
 
     //console.log("grouped: " + JSON.stringify(grouped));
-    //console.log("grouped type: " + typeof grouped);
 
     // set the row data for the table
     for (const [key, value] of Object.entries(grouped)) {
@@ -163,18 +158,18 @@ function Past() {
         );
     }
     
-   console.log("games: " + JSON.stringify(rowdata));   
+   //console.log("games: " + JSON.stringify(rowdata));   
 
     return (
-        <div>
+        <div align="center">
             <h1>Past games</h1>
 
-            <div className="ag-theme-material" style={{ height: '600px', width: '70%', margin: 'auto' }}>
+            <div className="ag-theme-material" style={{ height: '600px', width: '80%', margin: 'auto' }}>
                 <AgGridReact
                     columnDefs={columns}
                     rowData={rowdata}
                     pagination={true}
-                    paginationPageSize={20}>
+                    paginationPageSize={10}>
                 </AgGridReact>                     
             </div>
 
