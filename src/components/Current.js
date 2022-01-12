@@ -17,22 +17,20 @@ function Current() {
         
         // show the current game on the page
         if (datajson.t === undefined) { // games with undefined time are not finished
-            document.getElementById("answer").innerHTML = "<p>" +
-            "<b>GAME STARTED! </b> <br/>" +
+            document.getElementById("started").innerHTML = "<p>" +
+            "<b>GAME STARTED: </b> <br/>" +
             "<b>Game ID: </b>" + datajson.gameId + "<br/>" +
             "<b>Player A: </b>" + datajson.playerA.name + "<br/>" +
             "<b>Player B: </b>" + datajson.playerB.name + "<br/>" +
             "</p>";
         };        
-        if (datajson.t !== undefined) { // games with timestamp are finished
-            document.getElementById("answer").innerHTML = "<p>" +
-            "<b>GAME FINISHED! </b> <br/>" +
+        if (datajson.t !== undefined) { // games with a timestamp are finished
+            document.getElementById("finished").innerHTML = "<p>" +
+            "<b>GAME FINISHED: </b> <br/>" +
             "<b>Game ID: </b>" + datajson.gameId + "<br/>" +
             "<b>Timestamp: </b>" + datajson.t + "<br/>" + 
-            "<b>Player A: </b>" + datajson.playerA.name + "<br/>" +
-            "<b>A's hand: </b>" + datajson.playerA.played + "<br/>" +
-            "<b>Player B: </b>" + datajson.playerB.name + "<br/>" +
-            "<b>B's hand: </b>" + datajson.playerB.played + "<br/>" +
+            "<b>Player A: </b>" + datajson.playerA.name + " (" + datajson.playerA.played + ") <br/>" +
+            "<b>Player B: </b>" + datajson.playerB.name + " (" + datajson.playerB.played + ") <br/>" +            
             "</p>";
         };  
         
@@ -47,7 +45,8 @@ function Current() {
     return (
         <div align="center">
             <h1>Current games</h1>
-            <div id="answer"></div>
+            <div id="started"></div>
+            <div id="finished"></div>
         </div>
     );
 
