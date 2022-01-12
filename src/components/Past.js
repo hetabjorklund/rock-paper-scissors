@@ -4,7 +4,6 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import _ from "lodash";
 import postmandata from '../assets/postmanresponse.json';
-import testdata from '../assets/testdata.json';
 
 function Past() {
 
@@ -34,11 +33,9 @@ function Past() {
 
     // useEffect to set the histData
     useEffect(() => setHistdata(postmandata.data), []);
-    //useEffect(() => setHistdata(testdata.data), []);
     
-    //console.log("histdata: " + histdata);
     //console.log("histdata json-stringified: " + JSON.stringify(histdata));
-    console.log("histdata size: " + histdata.length)
+    //console.log("histdata size: " + histdata.length)
 
     // check win function
     function checkWin(wins, player, opponent) {
