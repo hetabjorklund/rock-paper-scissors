@@ -21,7 +21,7 @@ function Past() {
     const [histdata, setHistdata] = useState([]);
 
     // array for the row data
-    const [rowdata, setRowdata] = useState([]);
+    //const [rowdata, setRowdata] = useState([]);
 
     let player = {
         "name": "",
@@ -31,10 +31,10 @@ function Past() {
         "mostplayedhand" : ""
     };
 
-    //const tiedot = postmandata.data;
-    const tiedot = testdata.data;
-    console.log("tässä tiedot" + tiedot);
-    console.log("tiedon tyyppi " + typeof tiedot);
+    //const content = postmandata.data;
+    //const content = testdata.data;
+    //console.log("content: " + content);
+    //console.log("type of content: " + typeof content);
 
     // fetch all data from API
     /*const fetchData = () => {
@@ -44,21 +44,30 @@ function Past() {
         .catch(error => console.error(error));
     };*/
 
-    // useEffect here
-    //useEffect(() => setHistdata(postmandata.data[0]), []);
+    // useEffect to set the data
+    //useEffect(() => setHistdata(postmandata.data), []);
     useEffect(() => setHistdata(testdata.data), []);
     
-    console.log("histdata: " + histdata);
-    console.log("histdatan tyyppi: " + typeof histdata); // object
-    console.log("histdata-jsonstringify: " + JSON.stringify(histdata));
-    console.log("histdatan koko " + histdata.length)
+    //console.log("histdata: " + histdata);
+    //console.log("histdata type: " + typeof histdata); // object
+    //console.log("histdata-jsonstringify: " + JSON.stringify(histdata));
+    //console.log("histdata size: " + histdata.length)
 
     // divide games into groups based on player name
     const grouped = histdata.reduce((object, item) => {
-        if (!object[item.playerA.name]) {
-            object[item.playerA.name] = [];
+        if (!object[item.playerA.name]) { // if the player doesn't exist yet
+            object[item.playerA.name] = []; // create one
+
+            console.log("objekti: " + JSON.stringify(object[item.playerA.name]));
+
+            let hands = []; // list of hands the player has played
+            hands.push(item.playerA.played); // add the played hand to the list
+
+            console.log("hands: " + hands);
+            //object[item.playerA.name].hands = hands; // "hands" property is a list of hands played, each hand is a string
+
         }      
-        object[item.playerA.name].push(item);
+        object[item.playerA.name].push(item); // if the player exits, push into the existing one
 
         if (!object[item.playerB.name]) {
             object[item.playerB.name] = [];
@@ -69,11 +78,44 @@ function Past() {
     }, {});
 
     console.log("grouped: " + JSON.stringify(grouped));
-    console.log("grouped tyyppi " + typeof grouped);
-    console.log("grouped 0: " + grouped[1].toString());
+    console.log("grouped type: " + typeof grouped);
 
+    let games = []
+    for (const [key, value] of Object.entries(grouped)) {
+        console.log(`${key}: ${JSON.stringify(value)}`);
+
+        // for each value, get the game id's
+        let gameids = [];
+        value.forEach(v => {
+            //console.log(v.gameId);
+            gameids.push(v.gameId);
+          });        
+        
+        // push the data into the games array for the table
+        games.push(
+            {
+                "name": key,
+                "numberofmatches": value.length,
+                "matchesplayed": gameids,
+                "winratio": 0.0,
+                "mostplayedhand" : ""
+            }
+        );
+    }
     
+    console.log("games: " + JSON.stringify(games));
+
+    //setRowdata(games);    
     
+    /*
+    let player = {
+        "name": "",
+        "numberofmatches": 0,
+        "matchesplayed": [],
+        "winratio": 0.0,
+        "mostplayedhand" : ""
+    };*/
+
     // A: käydään ryhmittäin jaetut pelit läpi ja luodaan jokaisesta olio joka voidaan antaa taulukolle
     /*let games = []
     for (let [activity, trainings] of Object.entries(grouped)) {
@@ -93,7 +135,7 @@ function Past() {
             <div className="ag-theme-material" style={{ height: '700px', width: '70%', margin: 'auto' }}>
                 <AgGridReact
                     columnDefs={columns}
-                    rowData={rowdata}>
+                    rowData={games}>
                 </AgGridReact>                     
             </div>
 
