@@ -45,86 +45,37 @@ function Past() {
     //console.log("histdata json-stringified: " + JSON.stringify(histdata));
     //console.log("histdata size: " + histdata.length)
 
-    // check win A function
-    function checkWinA(playerswins, ahand, bhand) {
-        console.log("A checkwinissa!")
-
-        if (ahand === bhand) {
+    // check win function
+    function checkWin(wins, player, opponent) {
+        if (player === opponent) {
             // tie, do nothing
-            console.log("funktiossa tie, do nothing");
         }
-        else if (ahand === "SCISSORS") {
-            if (bhand === "ROCK") {
-                // b won, do nothing
-                console.log("funktiossa b won, do nothing");
+        else if (player === "SCISSORS") {
+            if (opponent === "ROCK") {
+                // opponent won, do nothing
             }
-            else if (bhand === "PAPER") {
-                playerswins++; // a won, increase wins
-                console.log("funktiossa a won");
+            else if (opponent === "PAPER") {
+                wins++; // player won, increase wins
             }
         }
-        else if (ahand === "ROCK") {
-            if (bhand === "SCISSORS") {
-                playerswins++; // a won, increase wins
-                console.log("funktiossa a won");
+        else if (player === "ROCK") {
+            if (opponent === "SCISSORS") {
+                wins++; // player won, increase wins
             }
-            else if (bhand === "PAPER") {
-                // b won, do nothing
-                console.log("funktiossa b won, do nothing");
+            else if (opponent === "PAPER") {
+                // opponent won, do nothing
             }
         }
-        else if (ahand === "PAPER") {
-            if (bhand === "ROCK") {
-                playerswins++; // a won, increase wins
-                console.log("funktiossa a won");
+        else if (player === "PAPER") {
+            if (opponent === "ROCK") {
+                wins++; // player won, increase wins
             }
-            else if (bhand === "SCISSORS") {
-                // b won, do nothing
-                console.log("funktiossa b won, do nothing");
+            else if (opponent === "SCISSORS") {
+                // opponent won, do nothing
             }
         }
-        return playerswins;
-    }
-
-    function checkWinB(playerswins, ahand, bhand) {
-        console.log("B checkwinissa!")
-
-        if (ahand === bhand) {
-            // tie, do nothing
-            console.log("b-check, tie, do nothing");
-        }
-        else if (ahand === "SCISSORS") {
-            if (bhand === "ROCK") {
-                playerswins++; // b won, increase wins
-                console.log("b-check, b won");
-            }
-            else if (bhand === "PAPER") {
-                // a won, do nothing
-                console.log("b-check, a won, do nothing");
-            }
-        }
-        else if (ahand === "ROCK") {
-            if (bhand === "SCISSORS") {
-                // a won, do nothing
-                console.log("b-check, a won, do nothing");
-            }
-            else if (bhand === "PAPER") {
-                playerswins++; // b won, increase wins
-                console.log("b-check, b won");
-            }
-        }
-        else if (ahand === "PAPER") {
-            if (bhand === "ROCK") {
-                // a won, do nothing
-                console.log("b-check, a won, do nothing");
-            }
-            else if (bhand === "SCISSORS") {
-                playerswins++; // b won, increase wins
-                console.log("b-check, b won");
-            }
-        }
-        return playerswins;
-    }
+        return wins;
+    }    
 
     // divide games into groups based on player name
     const grouped = histdata.reduce((object, item) => {
@@ -143,9 +94,8 @@ function Past() {
             object[item.playerA.name].hands.push(item.playerA.played); // push the played hand into hands
 
             // check win
-
-            let playerswins = object[item.playerA.name].wins;
-            object[item.playerA.name].wins = checkWinA(playerswins, ahand, bhand);      
+            let playersWins = object[item.playerA.name].wins;
+            object[item.playerA.name].wins = checkWin(playersWins, ahand, bhand);      
 
             /*if (ahand === bhand) {
                 // tie, do nothing
@@ -187,8 +137,8 @@ function Past() {
             object[item.playerA.name].hands.push(item.playerA.played) // push the played hand into hands
 
             // check win
-            let playerswins = object[item.playerA.name].wins;
-            object[item.playerA.name].wins = checkWinA(playerswins, ahand, bhand);
+            let playersWins = object[item.playerA.name].wins;
+            object[item.playerA.name].wins = checkWin(playersWins, ahand, bhand);      
 
             /*if (ahand === bhand) {
                 // tie, do nothing
@@ -235,8 +185,8 @@ function Past() {
             object[item.playerB.name].hands.push(item.playerB.played); // push the played hand into hands
             
             // check win
-            let playerswins = object[item.playerB.name].wins;
-            object[item.playerB.name].wins = checkWinB(playerswins, ahand, bhand);
+            let playersWins = object[item.playerB.name].wins;
+            object[item.playerB.name].wins = checkWin(playersWins, bhand, ahand);
 
             /*if (ahand === bhand) {
                 // tie, do nothing
@@ -278,8 +228,8 @@ function Past() {
             object[item.playerB.name].hands.push(item.playerB.played) // push the played hand into hands
 
             // check win
-            let playerswins = object[item.playerB.name].wins;
-            object[item.playerB.name].wins = checkWinB(playerswins, ahand, bhand);
+            let playersWins = object[item.playerB.name].wins;
+            object[item.playerB.name].wins = checkWin(playersWins, bhand, ahand);
 
             /*if (ahand === bhand) {
                 // tie, do nothing
