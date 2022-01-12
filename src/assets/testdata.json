@@ -1,0 +1,408 @@
+{
+    "cursor": "/rps/history?cursor=4C0a6kdM87GM",
+    "data": [
+        {
+            "type": "GAME_RESULT",
+            "gameId": "91ee421b058bf75ffe",
+            "t": 1641733604522,
+            "playerA": {
+                "name": "Mielikki Hämäläinen",
+                "played": "PAPER"
+            },
+            "playerB": {
+                "name": "Tuuri Hämäläinen",
+                "played": "SCISSORS"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "f86c80976f60ef656531",
+            "t": 1641734643304,
+            "playerA": {
+                "name": "Untamo Hämäläinen",
+                "played": "SCISSORS"
+            },
+            "playerB": {
+                "name": "Sampo Koskinen",
+                "played": "SCISSORS"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "feda5357ba3049a20ee",
+            "t": 1641736162497,
+            "playerA": {
+                "name": "Mielikki Koskinen",
+                "played": "SCISSORS"
+            },
+            "playerB": {
+                "name": "Untamo Laine",
+                "played": "SCISSORS"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "4b350e36478263218c48651",
+            "t": 1641735917810,
+            "playerA": {
+                "name": "Vellamo Korhonen",
+                "played": "ROCK"
+            },
+            "playerB": {
+                "name": "Marjatta Virtanen",
+                "played": "ROCK"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "1230ec53fa05ec68ce2",
+            "t": 1641735573520,
+            "playerA": {
+                "name": "Ukko Jokinen",
+                "played": "ROCK"
+            },
+            "playerB": {
+                "name": "Aino Koskinen",
+                "played": "PAPER"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "7b03fd44cbce0c05b17de9eb",
+            "t": 1641733289108,
+            "playerA": {
+                "name": "Tellervo Hämäläinen",
+                "played": "SCISSORS"
+            },
+            "playerB": {
+                "name": "Kyllikki Nieminen",
+                "played": "SCISSORS"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "b22546ea02b1e8db7c0",
+            "t": 1641735364708,
+            "playerA": {
+                "name": "Marjatta Mäkelä",
+                "played": "SCISSORS"
+            },
+            "playerB": {
+                "name": "Louhi Nieminen",
+                "played": "PAPER"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "fd5ec44bec63e647d897",
+            "t": 1641733536428,
+            "playerA": {
+                "name": "Tellervo Korhonen",
+                "played": "SCISSORS"
+            },
+            "playerB": {
+                "name": "Ahti Virtanen",
+                "played": "SCISSORS"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "865bd992d43183353e24ef44",
+            "t": 1641733860196,
+            "playerA": {
+                "name": "Louhi Mäkelä",
+                "played": "PAPER"
+            },
+            "playerB": {
+                "name": "Otso Laine",
+                "played": "PAPER"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "e40b575186863a7a0b",
+            "t": 1641733429204,
+            "playerA": {
+                "name": "Louhi Mäkelä",
+                "played": "PAPER"
+            },
+            "playerB": {
+                "name": "Seppo Koskinen",
+                "played": "SCISSORS"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "3f5c5671cd8b7426c0d",
+            "t": 1641735172944,
+            "playerA": {
+                "name": "Kyllikki Hämäläinen",
+                "played": "PAPER"
+            },
+            "playerB": {
+                "name": "Tapio Laine",
+                "played": "ROCK"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "49b99420795245eb2a5",
+            "t": 1641733766773,
+            "playerA": {
+                "name": "Mielikki Laine",
+                "played": "PAPER"
+            },
+            "playerB": {
+                "name": "Ukko Koskinen",
+                "played": "SCISSORS"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "aaf9cc80aa5e890da1d8f9b",
+            "t": 1641733246592,
+            "playerA": {
+                "name": "Seppo Laine",
+                "played": "ROCK"
+            },
+            "playerB": {
+                "name": "Marjatta Koskinen",
+                "played": "SCISSORS"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "100b1c79a49b458bfbace",
+            "t": 1641733230191,
+            "playerA": {
+                "name": "Vellamo Koskinen",
+                "played": "PAPER"
+            },
+            "playerB": {
+                "name": "Aino Laine",
+                "played": "PAPER"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "7e695ba4b6e9bbc49d3539",
+            "t": 1641733609911,
+            "playerA": {
+                "name": "Otso Virtanen",
+                "played": "PAPER"
+            },
+            "playerB": {
+                "name": "Vellamo Korhonen",
+                "played": "SCISSORS"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "1e3fc088c7b9613a159be",
+            "t": 1641734832465,
+            "playerA": {
+                "name": "Aino Korhonen",
+                "played": "ROCK"
+            },
+            "playerB": {
+                "name": "Tuuri Virtanen",
+                "played": "PAPER"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "e8363f54e809cc7c021",
+            "t": 1641735192553,
+            "playerA": {
+                "name": "Marjatta Hämäläinen",
+                "played": "ROCK"
+            },
+            "playerB": {
+                "name": "Tuuri Virtanen",
+                "played": "PAPER"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "349839408c3a4206f4",
+            "t": 1641736032671,
+            "playerA": {
+                "name": "Kokko Korhonen",
+                "played": "PAPER"
+            },
+            "playerB": {
+                "name": "Tapio Nieminen",
+                "played": "SCISSORS"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "01c265e208adea693d3b3c",
+            "t": 1641734935192,
+            "playerA": {
+                "name": "Ahti Koskinen",
+                "played": "ROCK"
+            },
+            "playerB": {
+                "name": "Ahti Koskinen",
+                "played": "ROCK"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "191532a85029d4a84964",
+            "t": 1641735438476,
+            "playerA": {
+                "name": "Tuuri Hämäläinen",
+                "played": "PAPER"
+            },
+            "playerB": {
+                "name": "Kyllikki Koskinen",
+                "played": "PAPER"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "67ccbdd2363d1dd23210bc2",
+            "t": 1641733500600,
+            "playerA": {
+                "name": "Ukko Nieminen",
+                "played": "SCISSORS"
+            },
+            "playerB": {
+                "name": "Tuuri Nieminen",
+                "played": "SCISSORS"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "ed39ce8366707314c2ac3",
+            "t": 1641734669657,
+            "playerA": {
+                "name": "Ahti Koskinen",
+                "played": "PAPER"
+            },
+            "playerB": {
+                "name": "Tuuri Koskinen",
+                "played": "ROCK"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "61e005c6e47335f91dfe",
+            "t": 1641734002848,
+            "playerA": {
+                "name": "Otso Nieminen",
+                "played": "PAPER"
+            },
+            "playerB": {
+                "name": "Ahti Nieminen",
+                "played": "ROCK"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "e7f294a658bbb33ab78d",
+            "t": 1641734406628,
+            "playerA": {
+                "name": "Sampo Laine",
+                "played": "ROCK"
+            },
+            "playerB": {
+                "name": "Sampo Laine",
+                "played": "SCISSORS"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "7b55f25895de32999284",
+            "t": 1641734220937,
+            "playerA": {
+                "name": "Louhi Koskinen",
+                "played": "SCISSORS"
+            },
+            "playerB": {
+                "name": "Tuuri Nieminen",
+                "played": "SCISSORS"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "530772f27e80510a60243b1c",
+            "t": 1641733718572,
+            "playerA": {
+                "name": "Marjatta Mäkelä",
+                "played": "SCISSORS"
+            },
+            "playerB": {
+                "name": "Ahti Koskinen",
+                "played": "ROCK"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "827a05d5d3e0fba422858c20",
+            "t": 1641735166116,
+            "playerA": {
+                "name": "Untamo Virtanen",
+                "played": "SCISSORS"
+            },
+            "playerB": {
+                "name": "Aino Mäkelä",
+                "played": "ROCK"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "03d161e8dc0fd64efca8",
+            "t": 1641736234392,
+            "playerA": {
+                "name": "Sampo Virtanen",
+                "played": "SCISSORS"
+            },
+            "playerB": {
+                "name": "Ukko Mäkinen",
+                "played": "ROCK"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "65267318dae559992cd94d1b",
+            "t": 1641734379076,
+            "playerA": {
+                "name": "Ukko Nieminen",
+                "played": "ROCK"
+            },
+            "playerB": {
+                "name": "Tellervo Jokinen",
+                "played": "ROCK"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "d99524c5f1bb2a1f5bdd438",
+            "t": 1641736586648,
+            "playerA": {
+                "name": "Aino Järvinen",
+                "played": "SCISSORS"
+            },
+            "playerB": {
+                "name": "Tellervo Hämäläinen",
+                "played": "SCISSORS"
+            }
+        },
+        {
+            "type": "GAME_RESULT",
+            "gameId": "3b146afb2485b48eba9",
+            "t": 1641733372904,
+            "playerA": {
+                "name": "Sampo Mäkinen",
+                "played": "PAPER"
+            },
+            "playerB": {
+                "name": "Ukko Järvinen",
+                "played": "ROCK"
+            }
+        }        
+    ]
+}
