@@ -10,11 +10,11 @@ function Past() {
 
     // columns for the table
     const columns = [
-        { headerName: "Player", field: "name", sortable: true, filter: true },
-        { headerName: "Number of matches", field: "numberofmatches", sortable: true, filter: true },
-        { headerName: "Matches played", field: "matchesplayed", sortable: true, filter: true },
-        { headerName: "Win ratio", field: "winratio", sortable: true, filter: true },        
-        { headerName: "Most played hand", field: "mostplayedhand", sortable: true, filter: true }
+        { headerName: "Player", field: "name", sortable: true, filter: true, resizable:true },
+        { headerName: "Number of matches", field: "numberofmatches", sortable: true, filter: true, resizable:true },
+        { headerName: "Matches played", field: "matchesplayed", sortable: true, filter: true, resizable:true },
+        { headerName: "Win ratio", field: "winratio", sortable: true, filter: true, resizable:true },        
+        { headerName: "Most played hand", field: "mostplayedhand", sortable: true, filter: true, resizable:true }
     ];
 
     // array for all the data fetched
@@ -362,7 +362,9 @@ function Past() {
             <div className="ag-theme-material" style={{ height: '600px', width: '70%', margin: 'auto' }}>
                 <AgGridReact
                     columnDefs={columns}
-                    rowData={rowdata}>
+                    rowData={rowdata}
+                    pagination={true}
+                    paginationPageSize={20}>
                 </AgGridReact>                     
             </div>
 
