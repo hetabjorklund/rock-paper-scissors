@@ -95,42 +95,7 @@ function Past() {
 
             // check win
             let playersWins = object[item.playerA.name].wins;
-            object[item.playerA.name].wins = checkWin(playersWins, ahand, bhand);      
-
-            /*if (ahand === bhand) {
-                // tie, do nothing
-                console.log("tie, do nothing");
-            }
-            else if (ahand === "SCISSORS") {
-                if (bhand === "ROCK") {
-                    // b won, do nothing
-                    console.log("b won, do nothing");
-                }
-                else if (bhand === "PAPER") {
-                    object[item.playerA.name].wins++; // a won, increase wins
-                    console.log("a won");
-                }
-            }
-            else if (ahand === "ROCK") {
-                if (bhand === "SCISSORS") {
-                    object[item.playerA.name].wins++; // a won, increase wins
-                    console.log("a won");
-                }
-                else if (bhand === "PAPER") {
-                    // b won, do nothing
-                    console.log("b won, do nothing");
-                }
-            }
-            else if (ahand === "PAPER") {
-                if (bhand === "ROCK") {
-                    object[item.playerA.name].wins++; // a won, increase wins
-                    console.log("a won");
-                }
-                else if (bhand === "SCISSORS") {
-                    // b won, do nothing
-                    console.log("b won, do nothing");
-                }
-            }  */         
+            object[item.playerA.name].wins = checkWin(playersWins, ahand, bhand);             
         }        
         else { // if the player exists, push into the existing one
             object[item.playerA.name].games.push(item); // push the item into games
@@ -138,42 +103,7 @@ function Past() {
 
             // check win
             let playersWins = object[item.playerA.name].wins;
-            object[item.playerA.name].wins = checkWin(playersWins, ahand, bhand);      
-
-            /*if (ahand === bhand) {
-                // tie, do nothing
-                console.log("normi tie, do nothing");
-            }
-            else if (ahand === "SCISSORS") {
-                if (bhand === "ROCK") {
-                    // b won, do nothing
-                    console.log("normi b won, do nothing");
-                }
-                else if (bhand === "PAPER") {
-                    object[item.playerA.name].wins++; // a won, increase wins
-                    console.log("normi a won");
-                }
-            }
-            else if (ahand === "ROCK") {
-                if (bhand === "SCISSORS") {
-                    object[item.playerA.name].wins++; // a won, increase wins
-                    console.log("normi a won");
-                }
-                else if (bhand === "PAPER") {
-                    // b won, do nothing
-                    console.log("normi b won, do nothing");
-                }
-            }
-            else if (ahand === "PAPER") {
-                if (bhand === "ROCK") {
-                    object[item.playerA.name].wins++; // a won, increase wins
-                    console.log("normi a won");
-                }
-                else if (bhand === "SCISSORS") {
-                    // b won, do nothing
-                    console.log("normi b won, do nothing");
-                }
-            }*/
+            object[item.playerA.name].wins = checkWin(playersWins, ahand, bhand);            
         }
 
         console.log("object.item.playerA.name: " + JSON.stringify(object[item.playerA.name]));
@@ -186,42 +116,7 @@ function Past() {
             
             // check win
             let playersWins = object[item.playerB.name].wins;
-            object[item.playerB.name].wins = checkWin(playersWins, bhand, ahand);
-
-            /*if (ahand === bhand) {
-                // tie, do nothing
-                console.log("b-check, tie, do nothing");
-            }
-            else if (ahand === "SCISSORS") {
-                if (bhand === "ROCK") {
-                    object[item.playerB.name].wins++; // b won, increase wins
-                    console.log("b-check, b won");
-                }
-                else if (bhand === "PAPER") {
-                    // a won, do nothing
-                    console.log("b-check, a won, do nothing");
-                }
-            }
-            else if (ahand === "ROCK") {
-                if (bhand === "SCISSORS") {
-                    // a won, do nothing
-                    console.log("b-check, a won, do nothing");
-                }
-                else if (bhand === "PAPER") {
-                    object[item.playerB.name].wins++; // b won, increase wins
-                    console.log("b-check, b won");
-                }
-            }
-            else if (ahand === "PAPER") {
-                if (bhand === "ROCK") {
-                    // a won, do nothing
-                    console.log("b-check, a won, do nothing");
-                }
-                else if (bhand === "SCISSORS") {
-                    object[item.playerB.name].wins++; // b won, increase wins
-                    console.log("b-check, b won");
-                }
-            }*/            
+            object[item.playerB.name].wins = checkWin(playersWins, bhand, ahand);                        
         }
         else { // if the player exists, push into the existing one
             object[item.playerB.name].games.push(item); // push the item into games
@@ -230,41 +125,6 @@ function Past() {
             // check win
             let playersWins = object[item.playerB.name].wins;
             object[item.playerB.name].wins = checkWin(playersWins, bhand, ahand);
-
-            /*if (ahand === bhand) {
-                // tie, do nothing
-                console.log("b-check, tie, do nothing");
-            }
-            else if (ahand === "SCISSORS") {
-                if (bhand === "ROCK") {
-                    object[item.playerB.name].wins++; // b won, increase wins
-                    console.log("b-check, b won");
-                }
-                else if (bhand === "PAPER") {
-                    // a won, do nothing
-                    console.log("b-check, a won, do nothing");
-                }
-            }
-            else if (ahand === "ROCK") {
-                if (bhand === "SCISSORS") {
-                    // a won, do nothing
-                    console.log("b-check, a won, do nothing");
-                }
-                else if (bhand === "PAPER") {
-                    object[item.playerB.name].wins++; // b won, increase wins
-                    console.log("b-check, b won");
-                }
-            }
-            else if (ahand === "PAPER") {
-                if (bhand === "ROCK") {
-                    // a won, do nothing
-                    console.log("b-check, a won, do nothing");
-                }
-                else if (bhand === "SCISSORS") {
-                    object[item.playerB.name].wins++; // b won, increase wins
-                    console.log("b-check, b won");
-                }
-            }*/
         }
         console.log("object.item.playerB.name: " + JSON.stringify(object[item.playerB.name]));
 
