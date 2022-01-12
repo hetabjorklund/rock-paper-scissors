@@ -23,12 +23,7 @@ function Past() {
     // array for the row data
     let rowdata = [];
 
-    //const content = postmandata.data;
-    //const content = testdata.data;
-    //console.log("content: " + content);
-    //console.log("type of content: " + typeof content);
-
-    // fetch all data from API
+    // fetch data from API
     /* This results in a CORS problem that I can't solve, the workaround is to fetch the data using Postman, copy that into a local .json file and use that as a source */
     /*const fetchData = () => {
         fetch('http://bad-api-assignment.reaktor.com/rps/history')        
@@ -38,12 +33,12 @@ function Past() {
     };*/
 
     // useEffect to set the histData
-    //useEffect(() => setHistdata(postmandata.data), []);
-    useEffect(() => setHistdata(testdata.data), []);
+    useEffect(() => setHistdata(postmandata.data), []);
+    //useEffect(() => setHistdata(testdata.data), []);
     
     //console.log("histdata: " + histdata);
     //console.log("histdata json-stringified: " + JSON.stringify(histdata));
-    //console.log("histdata size: " + histdata.length)
+    console.log("histdata size: " + histdata.length)
 
     // check win function
     function checkWin(wins, player, opponent) {
@@ -152,7 +147,7 @@ function Past() {
                 "name": key,
                 "numberofmatches": value.games.length,
                 "matchesplayed": gameids,
-                "winratio": ratio,
+                "winratio": ratio.toFixed(2),
                 "mostplayedhand" : mostcommonhand
             }
         );
