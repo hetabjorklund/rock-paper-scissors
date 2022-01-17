@@ -4,6 +4,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import _ from "lodash";
 import postmandata from '../assets/postmanresponse.json';
+import { Button } from "@mui/material";
 
 function Past() {
 
@@ -177,7 +178,7 @@ function Past() {
         <div align="center">
             <h1>Past games</h1>
 
-            <button onClick={onButtonClick}>Show player's games</button>
+            <Button variant="contained" color="success" onClick={onButtonClick}>Show player's games</Button>
 
             <div className="ag-theme-material" style={{ height: '600px', width: '80%', margin: 'auto' }}>
                 <AgGridReact
