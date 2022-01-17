@@ -157,7 +157,6 @@ function Past() {
 
     // look at the games of a specific player   
     const onButtonClick = event => {
-
         try {
             const selectedNode = gridRef.current.getSelectedNodes();
             const selectedData = selectedNode.map(node => node.data);
@@ -178,7 +177,6 @@ function Past() {
             //console.error(error);
             alert(`Select a player first!`);
         }
-
     }
 
     return (
