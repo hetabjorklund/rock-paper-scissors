@@ -156,28 +156,13 @@ function Past() {
 
     // look at the games of a specific player   
     const onButtonClick = event => {
-        const selectedNodes = gridRef.current.getSelectedNodes();
-        const selectedData = selectedNodes.map(node => node.data);
+        const selectedNode = gridRef.current.getSelectedNodes();
+        const selectedData = selectedNode.map(node => node.data);
         const playerName = selectedData[0].name;
-        //console.log("playername: " + JSON.stringify(playername));
         const playerInfo = grouped[playerName];
-        //console.log("selectedData: " + JSON.stringify(selectedData));
         const playerGames = playerInfo.games;
-
-        console.log("playerGames: " + JSON.stringify(playerGames))
-
-        /*for (const [key, value] of Object.entries(grouped)) {
-            //console.log(`${key}: ${JSON.stringify(value)}`);
-
-            
-            let gameids = [];
-            value.games*/
-
-
-
-
-        const selectedDataStringPresentation = selectedData.map(node => `${node.name} ${node.mostplayedhand}`).join(', ')
-        alert(`${JSON.stringify(playerGames)}`)
+        //console.log("playerGames: " + JSON.stringify(playerGames));
+        alert(`${JSON.stringify(playerGames)}`);
     }
 
     return (
