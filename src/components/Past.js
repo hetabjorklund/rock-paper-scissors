@@ -162,7 +162,15 @@ function Past() {
         const playerInfo = grouped[playerName];
         const playerGames = playerInfo.games;
         //console.log("playerGames: " + JSON.stringify(playerGames));
-        alert(`${JSON.stringify(playerGames)}`);
+        let textToShow = playerName + "'s games:\n\n";
+        for (let i = 0; i < playerGames.length; i++) {
+            textToShow += "Game ID: " + playerGames[i].gameId + "\n";
+            textToShow += "Timestamp: " + playerGames[i].t + "\n";
+            textToShow += "Player A: " + playerGames[i].playerA.name + " (" + playerGames[i].playerA.played + ")\n";
+            textToShow += "Player B: " + playerGames[i].playerB.name + " (" + playerGames[i].playerB.played + ")\n\n";
+            //console.log(textToShow);
+        }
+        alert(`${textToShow}`);
     }
 
     return (
