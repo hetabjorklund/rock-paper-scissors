@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
@@ -9,11 +9,11 @@ function Past() {
 
     // columns for the table
     const columns = [
-        { headerName: "Player", field: "name", sortable: true, filter: true, resizable:true },
-        { headerName: "Number of matches", field: "numberofmatches", sortable: true, filter: true, resizable:true },
-        { headerName: "Matches played", field: "matchesplayed", sortable: true, filter: true, resizable:true },
-        { headerName: "Win ratio", field: "winratio", sortable: true, filter: true, resizable:true },        
-        { headerName: "Most played hand", field: "mostplayedhand", sortable: true, filter: true, resizable:true }
+        { headerName: "Player", field: "name", sortable: true, filter: true, resizable: true },
+        { headerName: "Number of matches", field: "numberofmatches", sortable: true, filter: true, resizable: true },
+        { headerName: "Matches played", field: "matchesplayed", sortable: true, filter: true, resizable: true },
+        { headerName: "Win ratio", field: "winratio", sortable: true, filter: true, resizable: true },
+        { headerName: "Most played hand", field: "mostplayedhand", sortable: true, filter: true, resizable: true }
     ];
 
     // array for all the data fetched
@@ -21,6 +21,8 @@ function Past() {
 
     // array for the row data
     let rowdata = [];
+    // gridRef to select a row
+    const gridRef = useRef();
 
     // fetch data from API
     /* This results in a CORS problem that I can't solve, the workaround is to fetch the data using Postman, copy that into a local .json file and use that as a source */
@@ -33,7 +35,7 @@ function Past() {
 
     // useEffect to set the histData
     useEffect(() => setHistdata(postmandata.data), []);
-    
+
     //console.log("histdata json-stringified: " + JSON.stringify(histdata));
     //console.log("histdata size: " + histdata.length)
 
@@ -67,14 +69,14 @@ function Past() {
             }
         }
         return wins;
-    }    
+    }
 
     // divide games into groups based on player name
     const grouped = histdata.reduce((object, item) => {
 
         let ahand = item.playerA.played;
         let bhand = item.playerB.played;
-        
+
         // check player A
         if (!object[item.playerA.name]) { // if the player doesn't exist yet            
 
@@ -84,15 +86,15 @@ function Past() {
 
             // check win
             let playersWins = object[item.playerA.name].wins;
-            object[item.playerA.name].wins = checkWin(playersWins, ahand, bhand);             
-        }        
+            object[item.playerA.name].wins = checkWin(playersWins, ahand, bhand);
+        }
         else { // if the player exists, push into the existing one
             object[item.playerA.name].games.push(item); // push the item into games
             object[item.playerA.name].hands.push(item.playerA.played) // push the played hand into hands
 
             // check win
             let playersWins = object[item.playerA.name].wins;
-            object[item.playerA.name].wins = checkWin(playersWins, ahand, bhand);            
+            object[item.playerA.name].wins = checkWin(playersWins, ahand, bhand);
         }
         // console.log("player A: " + JSON.stringify(object[item.playerA.name]));
 
@@ -102,10 +104,10 @@ function Past() {
             object[item.playerB.name] = { "games": [], "hands": [], "wins": 0 }; // create one with three values, games & hands are arrays and wins is an integer 
             object[item.playerB.name].games.push(item); // push the item itself into games
             object[item.playerB.name].hands.push(item.playerB.played); // push the played hand into hands
-            
+
             // check win
             let playersWins = object[item.playerB.name].wins;
-            object[item.playerB.name].wins = checkWin(playersWins, bhand, ahand);                        
+            object[item.playerB.name].wins = checkWin(playersWins, bhand, ahand);
         }
         else { // if the player exists, push into the existing one
             object[item.playerB.name].games.push(item); // push the item into games
@@ -127,17 +129,17 @@ function Past() {
 
         // for each player, get the game id's
         let gameids = [];
-        value.games.forEach(v => { gameids.push(v.gameId); });        
+        value.games.forEach(v => { gameids.push(v.gameId); });
 
         // for each player, get the most played hand
         let mostcommonhand = _.head(_(value.hands)
             .countBy()
             .entries()
             .maxBy(_.last));
-        
+
         // count win ratio
         let ratio = value.wins / value.games.length;
-        
+
         // push the data into the games array
         rowdata.push(
             {
@@ -145,24 +147,55 @@ function Past() {
                 "numberofmatches": value.games.length,
                 "matchesplayed": gameids,
                 "winratio": ratio.toFixed(2),
-                "mostplayedhand" : mostcommonhand
+                "mostplayedhand": mostcommonhand
             }
         );
     }
-    
-   //console.log("games: " + JSON.stringify(rowdata));   
+
+    //console.log("games: " + JSON.stringify(rowdata));
+
+    // look at the games of a specific player   
+    const onButtonClick = event => {
+        const selectedNodes = gridRef.current.getSelectedNodes();
+        const selectedData = selectedNodes.map(node => node.data);
+        const playerName = selectedData[0].name;
+        //console.log("playername: " + JSON.stringify(playername));
+        const playerInfo = grouped[playerName];
+        //console.log("selectedData: " + JSON.stringify(selectedData));
+        const playerGames = playerInfo.games;
+
+        console.log("playerGames: " + JSON.stringify(playerGames))
+
+        /*for (const [key, value] of Object.entries(grouped)) {
+            //console.log(`${key}: ${JSON.stringify(value)}`);
+
+            
+            let gameids = [];
+            value.games*/
+
+
+
+
+        const selectedDataStringPresentation = selectedData.map(node => `${node.name} ${node.mostplayedhand}`).join(', ')
+        alert(`${JSON.stringify(playerGames)}`)
+    }
 
     return (
         <div align="center">
             <h1>Past games</h1>
+
+            <button onClick={onButtonClick}>Show player's games</button>
 
             <div className="ag-theme-material" style={{ height: '600px', width: '80%', margin: 'auto' }}>
                 <AgGridReact
                     columnDefs={columns}
                     rowData={rowdata}
                     pagination={true}
-                    paginationPageSize={10}>
-                </AgGridReact>                     
+                    paginationPageSize={10}
+                    ref={gridRef}
+                    onGridReady={params => gridRef.current = params.api}
+                    rowSelection="single">
+                </AgGridReact>
             </div>
 
         </div>
