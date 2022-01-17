@@ -157,21 +157,28 @@ function Past() {
 
     // look at the games of a specific player   
     const onButtonClick = event => {
-        const selectedNode = gridRef.current.getSelectedNodes();
-        const selectedData = selectedNode.map(node => node.data);
-        const playerName = selectedData[0].name;
-        const playerInfo = grouped[playerName];
-        const playerGames = playerInfo.games;
-        //console.log("playerGames: " + JSON.stringify(playerGames));
-        let textToShow = playerName + "'s games:\n\n";
-        for (let i = 0; i < playerGames.length; i++) {
-            textToShow += "Game ID: " + playerGames[i].gameId + "\n";
-            textToShow += "Timestamp: " + playerGames[i].t + "\n";
-            textToShow += "Player A: " + playerGames[i].playerA.name + " (" + playerGames[i].playerA.played + ")\n";
-            textToShow += "Player B: " + playerGames[i].playerB.name + " (" + playerGames[i].playerB.played + ")\n\n";
-            //console.log(textToShow);
+
+        try {
+            const selectedNode = gridRef.current.getSelectedNodes();
+            const selectedData = selectedNode.map(node => node.data);
+            const playerName = selectedData[0].name;
+            const playerInfo = grouped[playerName];
+            const playerGames = playerInfo.games;
+            //console.log("playerGames: " + JSON.stringify(playerGames));
+            let textToShow = playerName + "'s games:\n\n";
+            for (let i = 0; i < playerGames.length; i++) {
+                textToShow += "Game ID: " + playerGames[i].gameId + "\n";
+                textToShow += "Timestamp: " + playerGames[i].t + "\n";
+                textToShow += "Player A: " + playerGames[i].playerA.name + " (" + playerGames[i].playerA.played + ")\n";
+                textToShow += "Player B: " + playerGames[i].playerB.name + " (" + playerGames[i].playerB.played + ")\n\n";
+                //console.log(textToShow);
+            }
+            alert(`${textToShow}`);
+        } catch (error) {
+            //console.error(error);
+            alert(`Select a player first!`);
         }
-        alert(`${textToShow}`);
+
     }
 
     return (
