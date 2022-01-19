@@ -5,6 +5,9 @@ import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import _ from "lodash";
 import postmandata from '../assets/postmanresponse.json';
 import { Button } from "@mui/material";
+import { registerLocale } from "react-datepicker";
+import fi from 'date-fns/locale/fi';
+registerLocale('fi', fi);
 
 function Past() {
 
@@ -167,7 +170,7 @@ function Past() {
             let textToShow = playerName + "'s games:\n\n";
             for (let i = 0; i < playerGames.length; i++) {
                 textToShow += "Game ID: " + playerGames[i].gameId + "\n";
-                textToShow += "Timestamp: " + playerGames[i].t + "\n";
+                textToShow += "Date: " + new Date(playerGames[i].t).toLocaleDateString('fi-FI') + "\n";
                 textToShow += "Player A: " + playerGames[i].playerA.name + " (" + playerGames[i].playerA.played + ")\n";
                 textToShow += "Player B: " + playerGames[i].playerB.name + " (" + playerGames[i].playerB.played + ")\n\n";
                 //console.log(textToShow);
