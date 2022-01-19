@@ -170,7 +170,8 @@ function Past() {
             let textToShow = playerName + "'s games:\n\n";
             for (let i = 0; i < playerGames.length; i++) {
                 textToShow += "Game ID: " + playerGames[i].gameId + "\n";
-                textToShow += "Date: " + new Date(playerGames[i].t).toLocaleDateString('fi-FI') + "\n";
+                textToShow += "Date and time: " + new Date(playerGames[i].t).toLocaleDateString('fi-FI')
+                + ", " + new Date(playerGames[i].t).toLocaleTimeString('fi-FI') + "\n";
                 textToShow += "Player A: " + playerGames[i].playerA.name + " (" + playerGames[i].playerA.played + ")\n";
                 textToShow += "Player B: " + playerGames[i].playerB.name + " (" + playerGames[i].playerB.played + ")\n\n";
                 //console.log(textToShow);
