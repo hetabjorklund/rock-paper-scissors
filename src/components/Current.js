@@ -31,7 +31,9 @@ function Current() {
             document.getElementById("finished").innerHTML = "<p>" +
             "<b>GAME FINISHED: </b> <br/>" +
             "<b>Game ID: </b>" + datajson.gameId + "<br/>" +
-            "<b>Date: </b>" + new Date(datajson.t).toLocaleDateString('fi-FI') + "<br/>" +
+                "<b>Date and time: </b>" + new Date(datajson.t).toLocaleDateString('fi-FI')
+                + ", " + new Date(datajson.t).toLocaleTimeString('fi-FI')
+                + "<br/>" +
             "<b>Player A: </b>" + datajson.playerA.name + " (" + datajson.playerA.played + ") <br/>" +
             "<b>Player B: </b>" + datajson.playerB.name + " (" + datajson.playerB.played + ") <br/>" +
             "</p>";
